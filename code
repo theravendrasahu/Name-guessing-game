@@ -1,0 +1,74 @@
+import time
+
+# List of names
+names = ["Ankit", "Mohit", "Harsh", "Deewanshi", "Sushmita", "Manju"]
+
+# Pages with the corresponding names
+pages = {
+    1: ["Mohit", "Harsh", "Deewanshi", "Sushmita"],
+    2: ["Harsh","Deewanshi", "Ankit", "Mohit"],
+    3: ["Ankit", "Manju", "Mohit", "Harsh"],
+    4: ["Mohit", "Ankit", "Manju", "Sushmita"],
+    5: ["Deewanshi", "Manju", "Sushmita", "Harsh"],
+    6: ["Manju", "Ankit", "Deewanshi", "Sushmita"]
+}
+
+# Function to play the game
+def play_game():
+    print("Welcome to 'Guess the Name'!")
+    time.sleep(1)
+
+    # Display the list of names to choose from
+    print("Here is the list of your 6 colleagues:")
+    print(", ".join(names))  # Join names with commas for a neat display
+    
+    print("\nPlease pick a name from this list in your mind.")
+    time.sleep(2)  # Small pause to let the user pick
+
+    print("\nLet's see if we can guess the name you're thinking of!")
+    time.sleep(1)
+
+    # To store the sum of page numbers where user says "yes"
+    page_sum = 0
+
+    # Loop through each page and ask the user if their guessed name is on the page
+    for page_number in range(1, 7):  # Loop through pages 1 to 6
+        print("\n" + "-" * 40)  # Decorative line
+        print(f"Page {page_number}:")
+        print("-" * 40)  # Decorative line again
+        print(", ".join(pages[page_number]))  # Display names on the page
+        print("-" * 40)  # Decorative line
+
+        # Take input from the user (yes or no)
+        user_input = input("Is your guessed name on this page? (yes/no): ").lower()
+
+        # If the user says 'yes', add the page number to the sum
+        if user_input == 'yes':
+            page_sum += page_number
+
+    # Step 3: Check the sum and determine the guessed name
+    if page_sum == 15:
+        print("Your guessed name was Ankit.")
+    elif page_sum == 18:
+        print("Your guessed name was Manju.")
+    elif page_sum == 14:
+        print("Your guessed name was Deewanshi.")
+    elif page_sum == 10:
+        print("Your guessed name was Mohit.")
+    elif page_sum == 11:
+        print("Your guessed name was Harsh.")
+    elif page_sum == 16:
+        print("Your guessed name was Sushmita.")
+    else:
+        print("Could not determine the guessed name.")
+    
+    # Ask the user if they want to play again
+    play_again = input("\nWould you like to play again? (yes/no): ").lower()
+    if play_again == 'yes':
+        print("\nLet's guess the name again!\n")
+        play_game()  # Restart the game
+    else:
+        print("Thank you for playing! Goodbye!")
+
+# Call the game function for the first time
+play_game()
